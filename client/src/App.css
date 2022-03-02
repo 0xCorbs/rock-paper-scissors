@@ -1,0 +1,27 @@
+/* Styles go here */
+br {
+  display: block;
+  margin: -4px;
+}
+
+div {
+  word-wrap: break-word;
+}
+
+html,
+body,
+#app,
+#app > div {
+  height: 100vh;
+}
+body {
+  background: #feeb00;
+}
+
+.rps-img {
+  height: 60vh;
+}
+.disabledSection {
+  pointer-events: none;
+  opacity: 0.4;
+}
