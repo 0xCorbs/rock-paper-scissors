@@ -23,6 +23,7 @@ const App = () => {
   useEffect(() => {
     /** !UPDATE **/
     const loadWeb3 = async () => {
+      await window.ethereum.enable();
       if (typeof window.ethereum !== "undefined" && !wrongNetwork) {
         let accounts,
           network_,
