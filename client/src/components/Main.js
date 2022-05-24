@@ -36,12 +36,24 @@ const Main = ({ makeBet, web3, balance, maxBet, minBet, onChange, amount }) => {
               event.preventDefault();
               //start with digit, digit+dot* or single dot*, end with digit.
               let reg = new RegExp("^[0-9]*.?[0-9]+$");
+              let minBet_ = Number(
+                web3.utils.fromWei(minBet.toString())
+              ).toFixed(5);
 
-              if (reg.test(amount)) {
+              let maxBet_ = Number(
+                web3.utils.fromWei(maxBet.toString())
+              ).toFixed(5);
+
+              if (
+                (reg.test(amount) && amount <= minBet_) ||
+                (reg.test(amount) && amount >= maxBet_)
+              ) {
+                window.alert(
+                  "Please make sure that:\n*You typed positive interger or float number\n* Typed value is >= than MinBet (not all ETH decimals visible)\n* You are using Kovan network"
+                );
+              } else {
                 const amount_ = amount.toString();
                 makeBet(0, web3.utils.toWei(amount_));
-              } else {
-                window.alert("Please type positive interger or float numbers");
               }
             }}
           >
@@ -62,16 +74,17 @@ const Main = ({ makeBet, web3, balance, maxBet, minBet, onChange, amount }) => {
               let maxBet_ = Number(
                 web3.utils.fromWei(maxBet.toString())
               ).toFixed(5);
+
               if (
-                (reg.test(amount) && amount >= minBet_) ||
-                (reg.test(amount) && amount <= maxBet_)
+                (reg.test(amount) && amount <= minBet_) ||
+                (reg.test(amount) && amount >= maxBet_)
               ) {
-                const amount_ = amount.toString();
-                makeBet(1, web3.utils.toWei(amount_));
-              } else {
                 window.alert(
                   "Please make sure that:\n*You typed positive interger or float number\n* Typed value is >= than MinBet (not all ETH decimals visible)\n* You are using Kovan network"
                 );
+              } else {
+                const amount_ = amount.toString();
+                makeBet(1, web3.utils.toWei(amount_));
               }
             }}
           >

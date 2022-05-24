@@ -1,17 +1,9 @@
 import loading from "../logos/loading.gif";
-import React, { Component } from "react";
+import React from "react";
 import eth from "../logos/eth.png";
 import "../App.css";
 
-const Loading = ({
-  makeBet,
-  web3,
-  balance,
-  maxBet,
-  minBet,
-  onChange,
-  amount,
-}) => {
+const Loading = ({ web3, balance, maxBet, minBet, onChange }) => {
   return (
     <div className="container">
       <div className="card-body">
@@ -40,18 +32,6 @@ const Loading = ({
           <button
             type="submit"
             className="btn btn-danger btn-lg disabledSection"
-            onClick={(event) => {
-              event.preventDefault();
-              //start with digit, digit+dot* or single dot*, end with digit.
-              let reg = new RegExp("^[0-9]*.?[0-9]+$");
-
-              if (reg.test(amount)) {
-                const amount_ = amount.toString();
-                makeBet(0, web3.utils.toWei(amount_));
-              } else {
-                window.alert("Please type positive interger or float numbers");
-              }
-            }}
           >
             Rock
           </button>
@@ -59,23 +39,6 @@ const Loading = ({
           <button
             type="submit"
             className="btn btn-warning btn-lg disabledSection"
-            onClick={(event) => {
-              event.preventDefault();
-              //start with digit, digit+dot* or single dot*, end with digit.
-              let reg = new RegExp("^[0-9]*.?[0-9]+$");
-              let minBet_ = Number(
-                web3.utils.fromWei(minBet.toString())
-              ).toFixed(5);
-
-              if (reg.test(amount) && amount >= minBet_) {
-                const amount_ = amount.toString();
-                makeBet(1, web3.utils.toWei(amount_));
-              } else {
-                window.alert(
-                  "Please make sure that:\n*You typed positive interger or float number\n* Typed value is >= than MinBet (not all ETH decimals visible)\n* You are using Kovan network"
-                );
-              }
-            }}
           >
             Paper
           </button>
@@ -83,23 +46,6 @@ const Loading = ({
           <button
             type="submit"
             className="btn btn-success btn-lg disabledSection"
-            onClick={(event) => {
-              event.preventDefault();
-              //start with digit, digit+dot* or single dot*, end with digit.
-              let reg = new RegExp("^[0-9]*.?[0-9]+$");
-              let minBet_ = Number(
-                web3.utils.fromWei(minBet.toString())
-              ).toFixed(5);
-
-              if (reg.test(amount) && amount >= minBet_) {
-                const amount_ = amount.toString();
-                makeBet(2, web3.utils.toWei(amount_));
-              } else {
-                window.alert(
-                  "Please make sure that:\n*You typed positive interger or float number\n* Typed value is >= than MinBet (not all ETH decimals visible)\n* You are using Kovan network"
-                );
-              }
-            }}
           >
             Scissors
           </button>
